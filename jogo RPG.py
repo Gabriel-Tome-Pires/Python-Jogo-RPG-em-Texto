@@ -34,7 +34,7 @@ def poisoned(who):
 nome = str(input('Digite o nome do personagem '))
 nome = nome.strip()
 
-clas = int(input('Escolha uma das seguintes classes: \033[35m1-mago \033[31m2-guerreiro \033[33m3-monge \033[32m4-druida '))
+clas = int(input('Escolha uma das seguintes classes: \033[35m1-mago \033[31m2-guerreiro \033[33m3-monge \033[32m4-druida \033[m'))
 
 print('\nExplicações dos movimentos')
 print('<>'*20)
@@ -291,7 +291,6 @@ def combate(enemy, nv, atk=atk, defe=defe, life=life, speed=speed, imunPoi=imunP
     time.sleep(1)
     if clas == 1:
       #MAGO
-          print(f'nível: {nv}')
           print('Escolha um dos movimentos: \033[31m1-Incendiar\033[m \033[32m2-Terremoto\033[35m 3-Raio arcano \033[m')
           if nv >= 2:
             print('\033[36m4-Chuva de granito\033[m')#pouco dano. dá congelar
@@ -342,14 +341,14 @@ def combate(enemy, nv, atk=atk, defe=defe, life=life, speed=speed, imunPoi=imunP
             if ChoseMove == 3:
               #CRÍTICO
               if i == 1:
-                danoA += atk
+                danoA += atk/2
                 lifei -= danoA
                 print('CRÍTICO!!!')
                 print('\033[33m{} causou {} de dano\033[m'.format(nome, danoA))
 
               #FIM CRÍTICO
               else:
-                danoA += atk - defei*0.01*atk
+                danoA += (atk - defei*0.01*atk)/2
                 lifei -= danoA
                 print('\033[33m{} causou {} de dano\033[m'.format(nome, danoA))
             
@@ -375,9 +374,9 @@ def combate(enemy, nv, atk=atk, defe=defe, life=life, speed=speed, imunPoi=imunP
                 print('Esta magia é muito avançada, você falhou em conjurá-la')
             
             #TROVÃO
-            danoA = 0
             if ChoseMove == 5 and nv >= 4:
             #CRÍTICO
+              danoA = 0
               if i == 1:
                 dano = atk*1.6
                 lifei -= dano
